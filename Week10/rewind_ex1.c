@@ -18,7 +18,7 @@ int main() {
          printf("%s",buff);
          counter++; 
       }
-      printf("%d records read. Redisplay file? (y,n)",counter); 
+      printf("\n%d records read. Redisplay file? (y,n)",counter); 
       scanf(" %c",&continu);
       getchar(); // To consume the newline
 
