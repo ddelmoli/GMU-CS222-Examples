@@ -62,8 +62,8 @@ int listSize(node_t *p_head) {
 void printList(node_t *p_head) {
     int i = 0;
     node_t *curnode;
-    curnode = p_head;
     if (p_head != NULL) {
+        curnode = p_head;
         do {
             printf("Node %d value is %d\n", i, curnode->n);
             curnode = curnode->next;
@@ -77,19 +77,19 @@ void addValue(node_t **p_head, int p_n) {
     newnode = (node_t*) malloc(sizeof(node_t));
     newnode->n = p_n;
     newnode->next = NULL;
-    curnode = *p_head;
-    prevnode = *p_head;
-    if (curnode == NULL) {
+    if (*p_head == NULL) { // List was empty
         *p_head = newnode;
-    } else if (curnode->n > p_n) {
+    } else if ((*p_head)->n > p_n) { // New value will be new head
         newnode->next = *p_head;
         *p_head = newnode;
-    } else {
+    } else { // New value is either end or in middle
+        prevnode = *p_head;
+        curnode = *p_head;
         while (curnode->n < p_n && curnode->next != NULL) {
             prevnode = curnode;
             curnode = curnode->next;
         }
-        if (curnode->n < p_n && curnode->next == NULL) 
+        if (curnode->n < p_n && curnode->next == NULL)  // New value is end
             curnode->next = newnode;
         else {
             prevnode->next = newnode;
@@ -101,12 +101,12 @@ void addValue(node_t **p_head, int p_n) {
 void removeValue(node_t **p_head, int p_n) {
     node_t *curnode, *prevnode;
     curnode = *p_head;
-    if (curnode != NULL) {
+    if (curnode != NULL) { // List isnt empy
         while (curnode->n < p_n && curnode->next != NULL) {
             prevnode = curnode;
             curnode = curnode->next;
         }
-        if (curnode->n == p_n) {
+        if (curnode->n == p_n) { // Removing head
             if (curnode == *p_head) 
                 *p_head = curnode->next;
             else
