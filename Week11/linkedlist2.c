@@ -7,7 +7,7 @@ typedef struct node {
 } node_t;
 
 void addValue(node_t **p_head, int p_n);
-void removeValue(node_t **p_head, int p_n);
+int removeValue(node_t **p_head, int p_n);
 int listSize(node_t *p_head);
 void printList(node_t *p_head);
 
@@ -44,6 +44,9 @@ int main() {
     printList(head);
     printf("Removing 4\n");
     removeValue(&head, 4);
+    printList(head);
+    printf("Adding 2\n");
+    addValue(&head, 2); 
     printList(head);
     return 0;
 }
@@ -98,7 +101,8 @@ void addValue(node_t **p_head, int p_n) {
     }
 }
 
-void removeValue(node_t **p_head, int p_n) {
+int removeValue(node_t **p_head, int p_n) {
+    int retval = 0;
     node_t *curnode, *prevnode;
     curnode = *p_head;
     if (curnode != NULL) { // List isnt empy
@@ -106,12 +110,14 @@ void removeValue(node_t **p_head, int p_n) {
             prevnode = curnode;
             curnode = curnode->next;
         }
-        if (curnode->n == p_n) { // Removing head
-            if (curnode == *p_head) 
+        if (curnode->n == p_n) { 
+            if (curnode == *p_head) // Removing head
                 *p_head = curnode->next;
             else
                 prevnode->next = curnode->next;
             free(curnode);
+            retval = 1;
         }
     }
+    return retval;
 }
