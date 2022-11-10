@@ -82,17 +82,17 @@ void addValue(node_t **p_head, int p_n) {
     newnode->next = NULL;
     if (*p_head == NULL) { // List was empty
         *p_head = newnode;
-    } else if ((*p_head)->n > p_n) { // New value will be new head
+    } else if (p_n < (*p_head)->n) { // New value will be new head
         newnode->next = *p_head;
         *p_head = newnode;
     } else { // New value is either end or in middle
         prevnode = *p_head;
         curnode = *p_head;
-        while (curnode->n < p_n && curnode->next != NULL) {
+        while (p_n > curnode->n && curnode->next != NULL) {
             prevnode = curnode;
             curnode = curnode->next;
         }
-        if (curnode->n < p_n && curnode->next == NULL)  // New value is end
+        if (p_n > curnode->n && curnode->next == NULL)  // New value is end
             curnode->next = newnode;
         else {
             prevnode->next = newnode;
