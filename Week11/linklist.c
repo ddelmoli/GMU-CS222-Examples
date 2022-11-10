@@ -27,18 +27,20 @@ void printList() {
 void insert (int data) {
    // create a new link
    struct node *link = (struct node*) malloc(sizeof(struct node));
-   link->data = data; 
-   link->next = head; 
+   link->data = data;  // *link.data
+   link->next = head;  // *link.next
    head = link;
 }
 
 int main() { 
    insert(15); 
    insert(2);
+   /*
    insert(33); 
    insert(5); 
    insert(75); 
    insert(13);
+   */
    printList(); 
    return 0;
 }

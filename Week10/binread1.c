@@ -6,8 +6,9 @@ struct sampleData {
 };
 
 int main() {
-   int n;
-   struct sampleData data; 
+   int i;
+   int rr = 0;
+   struct sampleData data[3]; 
    FILE *fptr;
 
    if ((fptr = fopen("CS222_ex2.bin","rb")) == NULL) {  
@@ -15,11 +16,11 @@ int main() {
       exit(1); 
    }
 
-   for (n=3; n>=0; n--) {
-      fseek(fptr, n * sizeof(struct sampleData), SEEK_SET);    
-      fread(&data, sizeof(struct sampleData), 1, fptr);  
-      printf("n1:%d\tn2:%d\tn3:%d\n", data.n1, data.n2, data.n3);
-   }
+   rr = fread(data, 10 * sizeof(struct sampleData), 1, fptr);  
+   printf("Records read %d\n", rr);
+
+   for (i=0; i<3; i++) 
+      printf("n1:%d\tn2:%d\tn3:%d\n", data[i].n1, data[i].n2, data[i].n3);
 
    fclose(fptr);
    return 0; 
