@@ -1,0 +1,13 @@
+CC=gcc
+CFLAGS=-I.
+DEPS = hellomake.h
+OBJS = hellomake_funcs.o hellomake_main.o
+
+%.o: %.c $(DEPS)
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+hellomake.exe: $(OBJS)
+	$(CC) -o $@ $^ $(CFLAGS)
+
+clean:
+	rm -f *.exe *.o

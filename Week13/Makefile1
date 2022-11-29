@@ -1,0 +1,2 @@
+hellomake.exe: hellomake_funcs.c hellomake_main.c 
+	gcc -I. -o hellomake.c hellomake_funcs.c hellomake_main.c
